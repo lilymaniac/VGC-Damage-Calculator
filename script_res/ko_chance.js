@@ -137,22 +137,22 @@ function getKOChanceText(damage, move, defender, field, isBadDreams) {
 
     var multihit = damage.length === 256 || move.hits > 1;
     var c = getKOChance(damage, multihit, defender.curHP - hazards, 0, 1, defender.maxHP, toxicCounter, hasSitrus);
-    var afterText = hazardText.length > 0 ? ' after ' + serializeText(hazardText) : '';
+    var afterText = hazardText.length > 0 ? serializeText(hazardText) + ' 이후 ' : '';
     if (c === 1) {
-        return '확정 1타' + afterText;
+        return afterText + '확정 1타';
     } else if (c > 0) {
-        return qualifier + Math.round(c * 1000) / 10 + '% 확률로 1타' + afterText;
+        return afterText + qualifier + Math.round(c * 1000) / 10 + '% 확률로 1타';
     }
 
     if (hasSitrus && move.name !== '탁쳐서떨구기') {
         eotText.push('자뭉열매에 의한 회복');
     }
-    afterText = hazardText.length > 0 || eotText.length > 0 ? ' after ' + serializeText(hazardText.concat(eotText)) : '';
+    afterText = hazardText.length > 0 || eotText.length > 0 ? serializeText(hazardText.concat(eotText)) + ' 이후 ' : '';
     var i;
     for (i = 2; i <= 4; i++) {
         c = getKOChance(damage, multihit, defender.curHP - hazards, eot, i, defender.maxHP, toxicCounter, hasSitrus);
         if (c === 1) {
-            return '확정 ' + i + '타' + afterText;
+            return afterText + '확정 ' + i + '타';
         } else if (c > 0) {
             var pct = Math.round(c * 1000) / 10;
             var chance = pct ? qualifier + pct + '%' : '매우 적은';
@@ -162,9 +162,9 @@ function getKOChanceText(damage, move, defender, field, isBadDreams) {
 
     for (i = 5; i <= 9; i++) {
         if (predictTotal(damage[0], eot, i, toxicCounter, defender.curHP - hazards, defender.maxHP, hasSitrus) >= defender.curHP - hazards) {
-            return '확정 ' + i + '타' + afterText;
+            return afterText + '확정 ' + i + '타';
         } else if (predictTotal(damage[damage.length-1], eot, i, toxicCounter, defender.curHP - hazards, defender.maxHP, hasSitrus) >= defender.curHP - hazards) {
-            return '난수 ' + i + '타' + afterText; //possible
+            return afterText + '난수 ' + i + '타'; //possible
         }
     }
 
@@ -332,12 +332,40 @@ function serializeText(arr) {
     } else if (arr.length === 1) {
         return arr[0];
     } else if (arr.length === 2) {
-        return arr[0] + " and " + arr[1];
+        //return arr[0] + " + " + arr[1];
+        return Josa(arr[0], '과') + arr[1];
     } else {
         var text = '';
         for (var i = 0; i < arr.length-1; i++) {
             text += arr[i] + ', ';
         }
-        return text + 'and ' + arr[arr.length-1];
+        //return text + ' + ' + arr[arr.length-1];
+        return Josa(text, '과') + arr[arr.length-1];
+    }
+}
+
+function Josa(originalString, josa) {
+    var dissolvedString = originalString.charCodeAt(originalString.length - 1) - 44032;
+
+    if (0 == originalString.length) {
+        return '';
+    }
+
+    if (0 > dissolvedString || 11171 < dissolvedString) {
+        return originalString;
+    }
+
+    if (0 == dissolvedString % 28) {
+        return originalString + getJosa(josa, false);
+    } else {
+        return originalString + getJosa(josa, true);
+    }
+}
+
+function getJosa(josa, hasBatchim) {
+    if (josa == '과' || josa == '와') {
+        return (hasBatchim ? '과 ' : '와 ');
+    } else {
+        return '**';
     }
 }
