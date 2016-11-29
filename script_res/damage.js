@@ -415,7 +415,7 @@ function getDamageResult(attacker, defender, move, field) {
         description.attackerAbility = attacker.ability;
     }
     
-    if ((attacker.item === "굵은뼈" && (attacker.name === "탕구리" || attacker.name === "텅구리" || attacker.name === "알로라 텅구리") && move.category === "물리") ||
+    if ((attacker.item === "굵은뼈" && (attacker.name === "탕구리" || attacker.name === "텅구리" || attacker.name === "텅구리-알로라") && move.category === "물리") ||
             (attacker.item === "심해의이빨" && attacker.name === "진주몽" && move.category === "특수") ||
             (attacker.item === "전기구슬" && attacker.name === "피카츄")) {
         atMods.push(0x2000);
