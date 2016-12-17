@@ -1027,6 +1027,12 @@ var MOVES_DPP = $.extend(true, {}, MOVES_ADV, {
         makesContact: true,
         hasRecoil: true
     },
+    '뒀다쓰기': {
+        bp: 130,
+        type: '노말',
+        category: '물리',
+        makesContact: true
+    },
     '분연': {
         bp: 80,
         type: '불꽃',
@@ -1445,6 +1451,7 @@ var MOVES_BW = $.extend(true, {}, MOVES_DPP, {
         hasSecondaryEffect: true
     },
     '점프킥': { bp: 100 },
+    '뒀다쓰기': { bp: 140 },
     '로킥': {
         bp: 60,
         type: '격투',
@@ -2333,9 +2340,24 @@ var MOVES_SM = $.extend(true, {}, MOVES_XY, {
     '아이언테일':{
         zp: 180
     },
-    '잠재파워':{
-        zp: 120
-    },
+    // 잠재파워 needs to have type set to 노말 for the Z-move lookup to work.
+    // Conversion of regular move to correct type is done in getMoveEffectiveness in damage.js
+    '잠재파워 벌레': { type: '노말', zp: 120 },
+    '잠재파워 악': { type: '노말', zp: 120 },
+    '잠재파워 드래곤': { type: '노말', zp: 120 },
+    '잠재파워 전기': { type: '노말', zp: 120 },
+    '잠재파워 격투': { type: '노말', zp: 120 },
+    '잠재파워 불꽃': { type: '노말', zp: 120 },
+    '잠재파워 비행': { type: '노말', zp: 120 },
+    '잠재파워 고스트': { type: '노말', zp: 120 },
+    '잠재파워 풀': { type: '노말', zp: 120 },
+    '잠재파워 땅': { type: '노말', zp: 120 },
+    '잠재파워 얼음': { type: '노말', zp: 120 },
+    '잠재파워 독': { type: '노말', zp: 120 },
+    '잠재파워 에스퍼': { type: '노말', zp: 120 },
+    '잠재파워 바위': { type: '노말', zp: 120 },
+    '잠재파워 강철': { type: '노말', zp: 120 },
+    '잠재파워 물': { type: '노말', zp: 120 },
     '크로스촙':{
         zp: 180
     },

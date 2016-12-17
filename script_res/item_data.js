@@ -176,7 +176,7 @@ ITEMS_XY.splice(ITEMS_XY.indexOf('마음의물방울'), 1);
 
 
 var ITEMS_SM = ITEMS_XY.concat([
-    
+    '무화열매'
 ]);
 
 function getItemBoostType(item) {

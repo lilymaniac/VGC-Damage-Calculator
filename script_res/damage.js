@@ -713,6 +713,10 @@ function getMoveEffectiveness(move, type, isGhostRevealed, isGravity) {
         return 2;
     } else if (move.name === "플라잉프레스") {
         return typeChart["격투"][type] * typeChart["비행"][type];
+    } else if (move.name.includes("잠재파워")){
+        var n = move.name.split(" ");
+        var hpType = n[n.length - 1];
+        return typeChart["노말"][type];
     } else {
         return typeChart[move.type][type];
     }

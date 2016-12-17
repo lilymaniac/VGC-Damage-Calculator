@@ -40,6 +40,7 @@ var ABILITIES_DPP = ABILITIES_ADV.concat([
     '건조피부',
     '필터',
     '플라워기프트',
+    '먹보',
     '내열',
     '아이스바디',
     '철주먹',
