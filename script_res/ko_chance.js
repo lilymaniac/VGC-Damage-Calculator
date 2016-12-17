@@ -353,14 +353,12 @@ function serializeText(arr) {
     } else if (arr.length === 1) {
         return arr[0];
     } else if (arr.length === 2) {
-        //return arr[0] + " + " + arr[1];
         return Josa(arr[0], '과') + arr[1];
     } else {
         var text = '';
         for (var i = 0; i < arr.length-1; i++) {
             text += arr[i] + ', ';
         }
-        //return text + ' + ' + arr[arr.length-1];
         return Josa(text, '과') + arr[arr.length-1];
     }
 }
